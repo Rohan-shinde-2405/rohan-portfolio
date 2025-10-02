@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Deep navy gradient + faint vignette --- */
+/* optional: slightly softer background vignette */
+body {
+  background:
+    radial-gradient(1100px 850px at 12% 82%, rgba(3, 14, 30, .45), transparent 60%),
+    radial-gradient(1000px 1000px at 78% 22%, rgba(10, 26, 47, .50), transparent 68%),
+    linear-gradient(180deg, #0a1224 0%, #0e1a2f 100%);
+}
+
+
+/* Subtle dot grid */
+body::before {
+  content: "";
+  position: fixed; inset: 0; z-index: -1;
+  background:
+    radial-gradient(circle at 1px 1px, rgba(35, 53, 84, .35) 1px, transparent 0) 0 0 / 18px 18px;
+  opacity: .12;
+  pointer-events: none;
+}
+
+/* Spotlight that follows the cursor (style set inline in App) */
+.spotlight {
+  position: fixed; inset: 0; pointer-events: none; z-index: 40;
+  mix-blend-mode: screen; /* makes the light pop nicely on dark bg */
+}
+
+/* Section heading underline */
+.section-title { @apply text-white text-2xl md:text-3xl font-extrabold tracking-tight; }
+.section-title::after {
+  content: ""; display: block; height: 2px; margin-top: .5rem;
+  background: linear-gradient(90deg, rgba(100,255,218, .9), rgba(100,255,218,0));
+}
+
+/* Reusable card */
+.card { @apply bg-night-800/70 border border-ring/40 rounded-2xl p-5 shadow-subtle; }
+
+/* Slow rotation */
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.spin-slow { animation: spin-slow 18s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .spin-slow { animation: none; }
+}
